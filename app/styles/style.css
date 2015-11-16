@@ -1,0 +1,85 @@
+.sideBar {
+	background-color: #333;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.sideBar .btn {
+	background-color: #999;
+	border-width: 0;
+}
+
+.sideBar .btn:hover {
+	background-color: #f8f8f8;
+}
+.mainGraph{
+	overflow: hidden;
+}
+.name {
+	background-color: #F00;
+	min-height: 100px;
+	margin-top: 0px;
+}
+
+ul li {
+	border: 0px solid #fff !important;
+}
+
+.list-group {
+	padding: 0px 10px;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 160px;
+    overflow-x: hidden;
+}
+
+.year{
+	margin-bottom: 30px;
+}
+
+.price{
+	margin-top: 30px;
+}
+
+.btn-group-vertical > button {
+	margin-bottom: 10px;
+}
+
+ #map { 
+ 	height: 300px;
+ 	width: 100%; 
+ }
+
+#graph{
+	background-color: #f0f0f0;
+	margin-bottom: 30px;
+}
+
+ path {
+	stroke: steelblue;
+	stroke-width: 1;
+	fill: none;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+}
+.x.axis line {
+  stroke: lightgrey;
+}
+.x.axis .minor {
+  stroke-opacity: .5;
+}
+.x.axis path {
+  display: none;
+}
+.y.axis line, .y.axis path {
+  fill: none;
+  stroke: #000;
+}
+
+.detail{
+	background-color: #f0f0f0;
+}

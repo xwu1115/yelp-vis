@@ -15,4 +15,12 @@ window.YelpInfoVis = {
 $(document).ready(function () {
     'use strict';
     YelpInfoVis.init();
+
+    this.appRouter = new YelpInfoVis.Routers.AppRouter;
+    Backbone.history.start({ pushState: true });
 });
+
+function initMapView(){
+     var mapView = new YelpInfoVis.Views.MapView({el:'.mainGraph'});
+        
+}

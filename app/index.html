@@ -8,6 +8,7 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="styles/style.css">
         <!-- endbuild -->
         <!-- build:js scripts/vendor/modernizr.js -->
         <script src="bower_components/modernizr/modernizr.js"></script>
@@ -19,59 +20,16 @@
         <![endif]-->
 
 
-        <div class="container">
-            <div class="header">
-                <ul class="nav nav-pills pull-right">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <h3 class="text-muted">YelpInfoVis</h3>
-            </div>
-
-            <div class="jumbotron">
-                <h1>'Allo, 'Allo!</h1>
-                <p class="lead">Always a pleasure scaffolding your apps.</p>
-                <p><a class="btn btn-lg btn-success" href="#">Splendid!</a></p>
-            </div>
-
-            <div class="row text-left">
-                <div class="col-md-offset-4">
-                    <h2>Now Try,</h2>
-                    <h4><b>yo backbone:router</b> &lt;router&gt;</h4>
-                    <h4><b>yo backbone:collection</b> &lt;collection&gt;</h4>
-                    <h4><b>yo backbone:model </b> &lt;model&gt;</h4>
-                    <h4><b>yo backbone:view </b> &lt;view&gt;</h4>
+        <div class="container-fluid">
+            <div class ="content">
+                <div class = "col-lg-3 col-md-3 col-sm-12 sideBar">
                 </div>
-            </div>
-
-            <div class="row marketing">
-                <div class="col-lg-6">
-                    <h4>HTML5 Boilerplate</h4>
-                    <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
-
-                    <h4>Bootstrap</h4>
-                    <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p>
-
-                    <h4>Modernizr</h4>
-                    <p>Modernizr is an open-source JavaScript library that helps you build the next generation of HTML5 and CSS3-powered websites.</p>
-
+                <div class = "col-lg-6 col-md-6 col-sm-12 mainGraph">
+                     <div id="graph"></div>
+                     <div id="map"></div>
                 </div>
-                <div class="col-lg-6">
-                    <h4>Backbone.js</h4>
-                    <p>Backbone.js gives structure to web applications by providing models, collections, views and connects it all to your existing API over a RESTful JSON interface.</p>
-
-                    <h4>Lodash.js</h4>
-                    <p>A utility library delivering consistency, customization, performance, & extras. </p>
-
-
-                </div>
+                <div class = "col-lg-3 col-md-3 col-sm-12 detail">Detail</div>
             </div>
-
-            <div class="footer">
-                <p>♥ from the Yeoman team</p>
-            </div>
-
         </div>
 
 
@@ -106,9 +64,23 @@
         <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
         <!-- endbuild -->
 
+        <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
         <!-- build:js({.tmp,app}) scripts/main.js -->
         <script src="scripts/main.js"></script>
         <script src="scripts/templates.js"></script>
+        <script src="scripts/models/Map.js"></script>
+        <script src="scripts/views/MapView.js"></script>
+        <script src="scripts/routes/AppRouter.js"></script>
+        <script src="scripts/models/Graph.js"></script>
+        <script src="scripts/views/GraphView.js"></script>
+        <script src="scripts/views/ControlPanel.js"></script>
+        <script src="scripts/models/Downloader.js"></script>
+        <script src="scripts/models/Control.js"></script>
+        <script src="scripts/models/ResturantDetail.js"></script>
+        <script src="scripts/views/ResturantDetailView.js"></script>
         <!-- endbuild -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWoM60pPKM0Y_D6hFIxOkoiUBRpbMGY1w&callback=initMapView"
+        async defer></script>
 </body>
 </html>
