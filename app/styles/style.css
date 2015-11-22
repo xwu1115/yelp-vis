@@ -94,10 +94,12 @@ ul li {
 .detail{
 	background-color: #f0f0f0;
 	width:30%;
+	padding:0px;
 }
 .header_s{
 	font-size:12px;
 	margin-bottom:-3px;
+	color:#fff;
 }
 .header_l{
 	font-size:28px;
@@ -105,12 +107,47 @@ ul li {
 	font-weight:500;
 }
 
-.dropdown-menu .scrollable-menu{
-	width:150px;
-}
-
 
 .year_dropdown {
 	width:120px;
 	color:#000;
+}
+
+.detail_retail {
+	height:100px;
+	background-color:#dddcdb;
+	padding-top:10px;
+	padding-left:15px;
+}
+
+	.retail_name {
+		font-size:24px;
+		margin-bottom:0px;
+	}
+
+	.retail_review{
+		font-size:12px;
+		margin-bottom:0px;
+
+	}
+	.retail_type{
+		font-size:12px;
+		margin-bottom:0px;
+
+	}
+	.retail_location{
+		font-size:12px;
+		margin-bottom:0px;
+	}
+
+.detail_vis1 {
+	height:300px;
+	background-color:#817392;
+
+}
+
+
+.detail_vis2 {
+	height:300px;
+	background-color:#582942;
 }
