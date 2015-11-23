@@ -21,6 +21,7 @@ $(document).ready(function () {
 });
 
 function initMapView(){
+	'use strict';
      var mapView = new YelpInfoVis.Views.MapView({el:'.mainGraph'});
         
 }
