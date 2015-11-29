@@ -22,8 +22,8 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
         },
 
         render: function () {
+            console.log('panel render!');
             this.$el.html(this.template(this.model.toJSON()));
-            return this;
         },
 
         selectPrice: function() {

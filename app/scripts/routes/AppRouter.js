@@ -12,13 +12,13 @@ YelpInfoVis.Routers = YelpInfoVis.Routers || {};
 
     	mainPage: function(){
     		var control = new YelpInfoVis.Models.Control({});
-    		var controlPanelView = new YelpInfoVis.Views.ControlPanel({model:control});
-    		$(".sideBar").html(controlPanelView.render().el);
 
+    		var controlPanelView = new YelpInfoVis.Views.ControlPanel({model:control, el:'.sideBar'});
+            controlPanelView.render();
+            
             var graph = new YelpInfoVis.Views.GraphView({el:'.mainGraph'});
             graph.render();
-
-            var resturant = new YelpInfoVis.Models.ResturantDetail({});
+            
     	},
 
     	loadView: function (view) {

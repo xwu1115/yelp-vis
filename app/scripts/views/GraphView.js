@@ -17,71 +17,128 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
 
         events: {},
 
-        initialize: function () {
-            this.initGraph();
+        resturant: {},
 
-            this.listenTo(this.model, 'change', this.render);
+        initialize: function () {
+            //this.listenTo(this.model, 'change', this.render);
+            downloadTmp(this.initGraph);
         },
 
         render: function () {
-            this.$el.html(this.template(this.model.toJSON()));
-            return this;
+            //this.$el.html(this.template(this.model.toJSON()));
+            //return this;
         },
 
-        initGraph: function () {
-            var m = [80, 80, 80, 80]; // margins
-            var w = 600 - m[1] - m[3]; // width
-            var h = 300 - m[0] - m[2]; // height
-        
-            // create a simple data array that we'll plot with a line (this array represents only the Y values, X will just be the index location)
-            var data = [3, 6, 2, 7, 5, 2, 0, 3, 8, 9, 2, 5, 9, 3, 6, 3, 6, 2, 7, 5, 2, 1, 3, 8, 9, 2, 5, 9, 2, 7];
-            // X scale will fit all values from data[] within pixels 0-w
-            var x = d3.scale.linear().domain([0, data.length]).range([0, w]);
-            // Y scale will fit values from 0-10 within pixels h-0 (Note the inverted domain for the y-scale: bigger is up!)
-            var y = d3.scale.linear().domain([0, 10]).range([h, 0]);
-            // automatically determining max range can work something like this
-            // var y = d3.scale.linear().domain([0, d3.max(data)]).range([h, 0]);
-            // create a line function that can convert data[] into x and y points
-            var line = d3.svg.line()
-                // assign the X function to plot our line as we wish
-                .x(function(d,i) { 
-                    // verbose logging to show what's actually being done
-                    console.log('Plotting X value for data point: ' + d + ' using index: ' + i + ' to be at: ' + x(i) + ' using our xScale.');
-                    // return the X coordinate where we want to plot this datapoint
-                    return x(i); 
-                })
-                .y(function(d) { 
-                    // verbose logging to show what's actually being done
-                    console.log('Plotting Y value for data point: ' + d + ' to be at: ' + y(d) + " using our yScale.");
-                    // return the Y coordinate where we want to plot this datapoint
-                    return y(d); 
-                })
-                // Add an SVG element with the desired dimensions and margin.
-                var graph = d3.select("#graph").append("svg:svg")
-                      .attr("width", w + m[1] + m[3])
-                      .attr("height", h + m[0] + m[2])
-                      .append("svg:g")
-                      .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
-                // create yAxis
-                var xAxis = d3.svg.axis().scale(x).tickSize(-h).tickSubdivide(true);
-                // Add the x-axis.
-                graph.append("svg:g")
-                      .attr("class", "x axis")
-                      .attr("transform", "translate(0," + h + ")")
-                      .call(xAxis);
-                // create left yAxis
-                var yAxisLeft = d3.svg.axis().scale(y).ticks(4).orient("left");
-                // Add the y-axis to the left
-                graph.append("svg:g")
-                      .attr("class", "y axis")
-                      .attr("transform", "translate(-25,0)")
-                      .call(yAxisLeft);
-                
-                // Add the line by appending an svg:path element with the data line we created above
-                // do this AFTER the axes above so that the line is above the tick-lines
-                graph.append("svg:path").attr("d", line(data));
-        }
+        initGraph: function (data) {
+             var margin = {top: 20, right: 30, bottom: 20, left: 30},
+                width = 600 - margin.left - margin.right,
+                height = 300 - margin.top - margin.bottom;
 
-    });
+            // setup x 
+            var xValue = function(d) { return d.review_count;}, 
+                xScale = d3.scale.linear().range([0, width]), 
+                xMap = function(d) { return xScale(xValue(d));}, 
+                xAxis = d3.svg.axis().scale(xScale).orient("bottom");
 
+            // setup y
+            var yValue = function(d) { return d.rating;}, 
+                yScale = d3.scale.linear().range([height, 0]), 
+                yMap = function(d) { return yScale(yValue(d));}, 
+                yAxis = d3.svg.axis().scale(yScale).orient("left");
+
+            // setup fill color
+            var cValue = function(d) { return d.review_count;},
+                color = d3.scale.category10();
+
+            // add the graph canvas to the body of the webpage
+            var svg = d3.select("#graph").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            // add the tooltip area to the webpage
+            var tooltip = d3.select("#graph").append("div")
+                .attr("class", "tooltip")
+                .style("opacity", 0);
+
+            var view = this;
+            // load data
+            // d3.csv("../data/data.csv", function(error, data) {
+
+            //   // change string (from CSV) into number format
+            //   data.forEach(function(d) {
+            //     d.reviewCount = +d.reviewCount;
+            //     d.ratingScore = +d.ratingScore
+            //     console.log(d);
+            //   });
+
+              // don't want dots overlapping axis, so add in buffer to data domain
+              xScale.domain([d3.min(data, xValue)-5, d3.max(data, xValue)+5]);
+              yScale.domain([d3.min(data, yValue)-0.25, d3.max(data, yValue)+0.25]);
+
+              // x-axis
+              svg.append("g")
+                  .attr("class", "x axis")
+                  .attr("transform", "translate(0," + height + ")")
+                  .call(xAxis)
+                  .append("text")
+                  .attr("class", "label")
+                  .attr("x", width)
+                  .attr("y", -6)
+                  .style("text-anchor", "end")
+                  .text("Rating Number");
+
+              // y-axis
+              svg.append("g")
+                  .attr("class", "y axis")
+                  .call(yAxis)
+                  .append("text")
+                  .attr("class", "label")
+                  .attr("transform", "rotate(-90)")
+                  .attr("y", 6)
+                  .attr("dy", ".71em")
+                  .style("text-anchor", "end")
+                  .text("Rating Score");
+
+              // draw dots
+              svg.selectAll(".dot")
+                  .data(data)
+                  .enter().append("circle")
+                  .attr("class", "dot")
+                  .attr("r", 6)
+                  .attr("cx", xMap)
+                  .attr("cy", yMap)
+                  .style("fill", function(d) { return d3.rgb("#817392");}) 
+                  .on("mouseover", function(d) {
+                    console.log(d);
+                    var category = "";
+                    for (var i = 0; i < d.categories.length; i++) {
+                        category += d.categories[i][0];
+                        category += "\r\n";
+                    };
+                    var location = "";
+                    for (var i = 0; i < d.location.display_address.length; i++) {
+                        location += d.location.display_address[i];
+                        location += "\r\n";
+                    };
+
+                    var resturant = new YelpInfoVis.Models.ResturantDetail({
+                        name: d.name, 
+                        reviewScore: d.rating,
+                        reviewNumber: d.review_count,
+                        type: category, 
+                        location: location, 
+                        reviews: []
+                    });
+                    $(".detail").empty();
+                    var view = new YelpInfoVis.Views.ResturantDetailView({el: ".detail", model: resturant});
+                    view.render();
+
+                  })
+                  .on("mouseout", function(d) {
+                     
+                  });
+            }
+        });
 })();
