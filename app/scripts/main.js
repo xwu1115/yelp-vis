@@ -8,14 +8,16 @@ window.YelpInfoVis = {
     Routers: {},
     init: function () {
         'use strict';
-        console.log('Hello from Backbone!');
     }
 };
+
+var positions = [];
+var map;
 
 $(document).ready(function () {
     'use strict';
     YelpInfoVis.init();
-
+    console.log('start!');
     this.appRouter = new YelpInfoVis.Routers.AppRouter;
     Backbone.history.start({ pushState: true });
 });

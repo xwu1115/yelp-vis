@@ -17,19 +17,21 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
 
         events: {},
 
+        positions:[],
+
         initialize: function () {
             this.initMap();
             this.showDetail();
-            this.listenTo(this.model, 'change', this.render);
+            //this.listenTo(this.model, 'change', this.render);
         },
 
         render: function () {
-            this.$el.append(this.template(this.model.toJSON()));
+            //this.$el.append(this.template(this.model.toJSON()));
         },
 
         initMap: function () {
-            var map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: -34.397, lng: 150.644},
+            map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 33.7758, lng: -84.3947},
                 zoom: 15
             });
 
@@ -39,12 +41,17 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
                     map.setCenter(initialLocation);
                 }, function() {});
             }
+
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(33.778463, -84.398881),
+                map: map
+            });
         },
 
         showDetail: function() {
-            var detail = new YelpInfoVis.Models.ResturantDetail({});
-            var detailView = new YelpInfoVis.Views.ResturantDetailView({model:detail, el:'.detail'});
-            detailView.render();
+            // var detail = new YelpInfoVis.Models.ResturantDetail({});
+            // var detailView = new YelpInfoVis.Views.ResturantDetailView({model:detail, el:'.detail'});
+            // detailView.render();
         }
     });
 
