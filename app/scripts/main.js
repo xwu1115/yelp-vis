@@ -11,7 +11,7 @@ window.YelpInfoVis = {
     }
 };
 
-var positions = [];
+var globalData = [];
 var map;
 
 $(document).ready(function () {

@@ -41,11 +41,6 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
                     map.setCenter(initialLocation);
                 }, function() {});
             }
-
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(33.778463, -84.398881),
-                map: map
-            });
         },
 
         showDetail: function() {

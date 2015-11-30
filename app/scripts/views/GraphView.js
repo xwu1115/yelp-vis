@@ -76,7 +76,7 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
               // don't want dots overlapping axis, so add in buffer to data domain
               xScale.domain([d3.min(data, xValue)-5, d3.max(data, xValue)+5]);
               yScale.domain([d3.min(data, yValue)-0.25, d3.max(data, yValue)+0.25]);
-
+              //yScale.domain([0, 5]);
               // x-axis
               svg.append("g")
                   .attr("class", "x axis")
@@ -106,34 +106,13 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
                   .data(data)
                   .enter().append("circle")
                   .attr("class", "dot")
-                  .attr("r", 6)
+                  .attr("r", 4)
                   .attr("cx", xMap)
                   .attr("cy", yMap)
                   .style("fill", function(d) { return d3.rgb("#817392");}) 
                   .on("mouseover", function(d) {
                     console.log(d);
-                    var category = "";
-                    for (var i = 0; i < d.categories.length; i++) {
-                        category += d.categories[i][0];
-                        category += "\r\n";
-                    };
-                    var location = "";
-                    for (var i = 0; i < d.location.display_address.length; i++) {
-                        location += d.location.display_address[i];
-                        location += "\r\n";
-                    };
-
-                    var resturant = new YelpInfoVis.Models.ResturantDetail({
-                        name: d.name, 
-                        reviewScore: d.rating,
-                        reviewNumber: d.review_count,
-                        type: category, 
-                        location: location, 
-                        reviews: []
-                    });
-                    $(".detail").empty();
-                    var view = new YelpInfoVis.Views.ResturantDetailView({el: ".detail", model: resturant});
-                    view.render();
+                    updateDetaiView(d);
 
                   })
                   .on("mouseout", function(d) {
