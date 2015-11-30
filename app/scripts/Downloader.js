@@ -65,30 +65,60 @@
                 'dataType' : 'jsonp',
                 'jsonpCallback' : 'cb',
                 'success' : function(data, textStats, XMLHttpRequest) {
-                    //var positions = [];
-                    for (var i = 0; i < data.businesses.length; i++) {
-                        var d = data.businesses[i];
-                        var co = d.location.coordinate;
-                        var pos = {};
-                        pos.lat = co.latitude;
-                        pos.lng = co.longitude;
-                        positions.push(pos);
-                    };
-                    console.log(positions);
+                    globalData = data.businesses;
                     updateMap();
                     callback(data.businesses);
                 }
         });
     }
 
-function updateMap(){
-    for (var i = 0; i < positions.length; i++) {
-            var cur = positions[i];
-            var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(cur.lat, cur.lng),
-            map: map
-        });
+    function updateMap(){
+        for (var i = 0; i < globalData.length; i++) {
+                var d = globalData[i];
+                var co = d.location.coordinate;
+                var lat = co.latitude;
+                var lng = co.longitude;
+
+                var circle = new google.maps.Circle({
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 0,
+                    strokeWeight: 2,
+                    fillColor: '#FF0000',
+                    fillOpacity: d.rating/5*0.8,
+                    map: map,
+                    center: new google.maps.LatLng(lat,lng),
+                    radius: d.review_count/8
+                });
+                circle['index'] = i;
+                circle.addListener('click', function (event) {
+                    updateDetaiView(globalData[this.index]);
+                });
+        }
     }
-}
+
+    function updateDetaiView(d){
+        var category = "";
+        for (var i = 0; i < d.categories.length; i++) {
+            category += d.categories[i][0];
+            category += "\r\n";
+        };
+        var location = "";
+        for (var i = 0; i < d.location.display_address.length; i++) {
+            location += d.location.display_address[i];
+            location += "\r\n";
+        };
+
+        var resturant = new YelpInfoVis.Models.ResturantDetail({
+            name: d.name, 
+            reviewScore: d.rating,
+            reviewNumber: d.review_count,
+            type: category, 
+            location: location, 
+            reviews: []
+        });
+        $(".detail").empty();
+        var view = new YelpInfoVis.Views.ResturantDetailView({el: ".detail", model: resturant});
+        view.render();
+    }
 
             
