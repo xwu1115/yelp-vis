@@ -119,6 +119,7 @@
         $(".detail").empty();
         var view = new YelpInfoVis.Views.ResturantDetailView({el: ".detail", model: resturant});
         view.render();
+        showWordCloud();
     }
 
             
