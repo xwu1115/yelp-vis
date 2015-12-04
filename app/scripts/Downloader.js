@@ -73,7 +73,6 @@
                     // updateMap();
                     // callback(data.businesses);
                     downloadText();
-
                 },
                 'error': function(XMLHttpRequest, textStatus, errorThrown) {
                     console.log(textStatus);
@@ -123,19 +122,20 @@
         $(".detail").empty();
         var view = new YelpInfoVis.Views.ResturantDetailView({el: ".detail", model: resturant});
         view.render();
-        showWordCloud();
+        showWordCloud(d.business_id);
+        if(timeData.length == 0){
+            downloadTimeData();
+        }
     }
 
     function downloadText(){
         $.ajax({
-                'url' : "../files/reviewData.json",
+                'url' : "../files/reviewText.json",
                 'dataType' : 'json',
                 'jsonpCallback' : 'cb',
                 'success' : function(data, textStats, XMLHttpRequest) {
                     textData = data;
-                    for (var key in textData) {
-                        console.log(key);
-                    };
+                    initDetailView(globalData);
                 },
                 'error': function(XMLHttpRequest, textStatus, errorThrown) {
                     console.log(textStatus);
@@ -143,4 +143,24 @@
         });
     }
 
+    function downloadTimeData(){
+        $.ajax({
+                'url' : "../files/newReviewData.json",
+                'dataType' : 'json',
+                'jsonpCallback' : 'cb',
+                'success' : function(data, textStats, XMLHttpRequest) {
+                    timeData = data;
+                    drawTimeView(data);
+                },
+                'error': function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log(textStatus);
+                }
+        });
+    }
+
+    function initDetailView(data){
+              var d = data[0];
+              console.log(d);
+              updateDetaiView(d);
+    }
             

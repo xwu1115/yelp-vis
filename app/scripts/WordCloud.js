@@ -1,10 +1,12 @@
-    function showWordCloud(){
-        var frequency_list = [{"text": "last", "size": 3}, {"text": "delicious", "size": 3}, {"text": "huge", "size": 3}, {"text": "sure", "size": 3}, {"text": "medical", "size": 3}, {"text": "other", "size": 4}, {"text": "many", "size": 5}, {"text": "nice", "size": 5}, {"text": "good", "size": 7}, {"text": "great", "size": 7}];
-        
+    function showWordCloud(id){
+        //var frequency_list = [{"text": "last", "size": 3}, {"text": "delicious", "size": 3}, {"text": "huge", "size": 3}, {"text": "sure", "size": 3}, {"text": "medical", "size": 3}, {"text": "other", "size": 4}, {"text": "many", "size": 5}, {"text": "nice", "size": 5}, {"text": "good", "size": 7}, {"text": "great", "size": 7}];
+        var frequency_list = textData[id];
+        console.log(frequency_list);
+
         d3.layout.cloud().size([500, 300])
             .words(frequency_list)
             .rotate(0)
-            .fontSize(function(d) { return d.size*2.5; })
+            .fontSize(function(d) { return d.size*100; })
             .on("end", draw)
             .start();
     }
@@ -26,10 +28,10 @@
                 .selectAll("text")
                 .data(words)
                 .enter().append("text")
-                .style("font-size", function(d) { return d.size*2.5 + "px"; })
+                .style("font-size", function(d) { return d.size*2 + "px"; })
                 .style("fill", function(d, i) { return color(i); })
                 .attr("transform", function(d) {
-                    return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                    return "translate(" + [d.x*1.4, d.y*1.4] + ")rotate(" + d.rotate + ")";
                 })
                 .text(function(d) { return d.text; });
     }

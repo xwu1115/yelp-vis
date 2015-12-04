@@ -13,6 +13,7 @@ window.YelpInfoVis = {
 
 var globalData = [];
 var textData = [];
+var timeData = [];
 var map;
 
 $(document).ready(function () {

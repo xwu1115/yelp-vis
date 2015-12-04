@@ -18,7 +18,6 @@ YelpInfoVis.Routers = YelpInfoVis.Routers || {};
             
             var graph = new YelpInfoVis.Views.GraphView({el:'.mainGraph'});
             graph.render();
-            
     	},
 
     	loadView: function (view) {

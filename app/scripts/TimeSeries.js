@@ -1,72 +1,50 @@
-/*global YelpInfoVis, Backbone, JST*/
+function drawTimeView (data) {
+    console.log(new Date(data[0].time));
+    var margin = {top: 20, right: 30, bottom: 20, left: 30},
+                width = 400 - margin.left - margin.right,
+                height = 200 - margin.top - margin.bottom;
 
-YelpInfoVis.Views = YelpInfoVis.Views || {};
 
-(function () {
-    'use strict';
-
-    YelpInfoVis.Views.GraphView = Backbone.View.extend({
-
-        template: JST['app/scripts/templates/GraphView.ejs'],
-
-        tagName: 'div',
-
-        id: '',
-
-        className: '',
-
-        events: {},
-
-        resturant: {},
-
-        initialize: function () {
-            //this.listenTo(this.model, 'change', this.render);
-            downloadTmp(this.initGraph);
-        },
-
-        render: function () {
-            //this.$el.html(this.template(this.model.toJSON()));
-            //return this;
-        },
-
-        initGraph: function (data) {
-            var margin = {top: 20, right: 30, bottom: 20, left: 30},
-                width = 600 - margin.left - margin.right,
-                height = 300 - margin.top - margin.bottom;
+            var xScale = d3.time.scale()
+                .domain([new Date(data[0].time), d3.time.day.offset(new Date(data[data.length - 1].time), 1)])
+                .rangeRound([0, width - margin.left - margin.right]);
 
             // setup x 
-            var xValue = function(d) { return d.review_count;}, 
-                xScale = d3.scale.linear().range([0, width]), 
-                xMap = function(d) { return xScale(xValue(d));}, 
-                xAxis = d3.svg.axis().scale(xScale).orient("bottom");
+            var xValue = function(d) { 
+                return[new Date(d.time)];
+            }, 
+                //xScale = d3.scale.linear().range([0, width]), 
+                //xMap = function(d) { return xScale(xValue(d));}, 
+                xAxis = d3.svg.axis().scale(xScale)
+                        .orient("bottom")
+                        .ticks(d3.time.months, 12)
+                        .tickFormat(d3.time.format('%y'))
+                        .tickSize(0)
+                        .tickPadding(1);
 
             // setup y
-            var yValue = function(d) { return d.stars;}, 
+            var yValue = function(d) { return d.score;}, 
                 yScale = d3.scale.linear().range([height, 0]), 
                 yMap = function(d) { return yScale(yValue(d));}, 
                 yAxis = d3.svg.axis().scale(yScale).orient("left");
 
             // setup fill color
-            var cValue = function(d) { return d.review_count;},
-                color = d3.scale.category10();
+            var cValue = function(d) { return d.score;},
+                color = d3.scale.category20c();
 
             // add the graph canvas to the body of the webpage
-            var svg = d3.select("#graph").append("svg")
+            var svg = d3.select(".detail_vis2").append("svg")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
             // add the tooltip area to the webpage
-            var tooltip = d3.select("#graph").append("div")
-                .attr("class", "tooltip")
-                .style("opacity", 0);
-
             var view = this;
             
               // don't want dots overlapping axis, so add in buffer to data domain
-              xScale.domain([d3.min(data, xValue)-5, d3.max(data, xValue)+5]);
-              yScale.domain([d3.min(data, yValue)-0.25, d3.max(data, yValue)+0.25]);
+              //xScale.domain([d3.min(data, xValue)-5, d3.max(data, xValue)+5]);
+              yScale.domain([0,5]);
               //yScale.domain([0, 5]);
               // x-axis
               svg.append("g")
@@ -78,7 +56,7 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
                   .attr("x", width)
                   .attr("y", -6)
                   .style("text-anchor", "end")
-                  .text("Rating Number");
+                  .text("Time");
 
               // y-axis
               svg.append("g")
@@ -97,18 +75,18 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
                   .data(data)
                   .enter().append("circle")
                   .attr("class", "dot")
-                  .attr("r", 3)
-                  .attr("cx", xMap)
+                  .attr("r", function(d){return d.num/8;})
+                  .attr("cx", function(d){return xScale(new Date(d.time));})
                   .attr("cy", yMap)
-                  .style("fill", function(d) { return d3.rgb("#817392");}) 
+                  .style("fill-opacity", .7)
+                  .style("stroke", "black")
+                  .style("stroke-opacity", "0")
+                  .style("fill", function(d) { return color(d.time);})
                   .on("mouseover", function(d) {
-                    console.log(d);
-                    updateDetaiView(d);
-
+                        d3.select(this).style("stroke-opacity", "1");
                   })
                   .on("mouseout", function(d) {
-                     
+                        d3.select(this).style("stroke-opacity", "0");
                   });
-            }
-        });
-})();
+
+}
