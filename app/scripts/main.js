@@ -19,7 +19,6 @@ var map;
 $(document).ready(function () {
     'use strict';
     YelpInfoVis.init();
-    console.log('start!');
     this.appRouter = new YelpInfoVis.Routers.AppRouter;
     Backbone.history.start({ pushState: true });
 });

@@ -97,9 +97,10 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
                   .data(data)
                   .enter().append("circle")
                   .attr("class", "dot")
-                  .attr("r", 3)
+                  .attr("r", 4)
                   .attr("cx", xMap)
                   .attr("cy", yMap)
+                  .style("opacity", "0.7")
                   .style("fill", function(d) { return d3.rgb("#817392");}) 
                   .on("mouseover", function(d) {
                     console.log(d);

@@ -13,8 +13,6 @@ function drawTimeView (data) {
             var xValue = function(d) { 
                 return[new Date(d.time)];
             }, 
-                //xScale = d3.scale.linear().range([0, width]), 
-                //xMap = function(d) { return xScale(xValue(d));}, 
                 xAxis = d3.svg.axis().scale(xScale)
                         .orient("bottom")
                         .ticks(d3.time.months, 12)
@@ -33,17 +31,17 @@ function drawTimeView (data) {
                 color = d3.scale.category20c();
 
             // add the graph canvas to the body of the webpage
-            var svg = d3.select(".detail_vis2").append("svg")
+            var svg = d3.select(".vis2_content").append("svg")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
             // add the tooltip area to the webpage
-            var view = this;
-            
-              // don't want dots overlapping axis, so add in buffer to data domain
-              //xScale.domain([d3.min(data, xValue)-5, d3.max(data, xValue)+5]);
+            var tooltip = d3.select(".vis2_content").append("div")
+                .attr("class", "tooltip")
+                .style("opacity", 0);
+
               yScale.domain([0,5]);
               //yScale.domain([0, 5]);
               // x-axis
@@ -79,14 +77,25 @@ function drawTimeView (data) {
                   .attr("cx", function(d){return xScale(new Date(d.time));})
                   .attr("cy", yMap)
                   .style("fill-opacity", .7)
-                  .style("stroke", "black")
+                  .style("stroke", "white")
                   .style("stroke-opacity", "0")
                   .style("fill", function(d) { return color(d.time);})
                   .on("mouseover", function(d) {
                         d3.select(this).style("stroke-opacity", "1");
+                        tooltip.transition()
+                           .duration(200)
+                           .style("opacity", 1);
+                        tooltip.html("Time: "+ d.time + "<br/>" + "Number:" + d.num)
+                           .style("left", (d3.event.layerX) + "px")
+                           .style("top", (d3.event.layerY) + "px");
+                           //.style("left", "0px")
+                           //.style("right", "0px");
                   })
                   .on("mouseout", function(d) {
                         d3.select(this).style("stroke-opacity", "0");
+                        tooltip.transition()
+                           .duration(500)
+                           .style("opacity", 0);
                   });
 
 }
