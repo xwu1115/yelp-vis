@@ -27,7 +27,7 @@
                 .data(words)
                 .enter().append("text")
                 .style("font-size", function(d) { return d.size*2.5 + "px"; })
-                .style("fill", function(d, i) { return color(9-i); })
+                .style("fill", function(d, i) { return color(i); })
                 .attr("transform", function(d) {
                     return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
                 })

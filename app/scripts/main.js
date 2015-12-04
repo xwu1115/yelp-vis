@@ -12,6 +12,7 @@ window.YelpInfoVis = {
 };
 
 var globalData = [];
+var textData = [];
 var map;
 
 $(document).ready(function () {

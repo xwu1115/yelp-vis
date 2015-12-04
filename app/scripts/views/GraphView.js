@@ -41,7 +41,7 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
                 xAxis = d3.svg.axis().scale(xScale).orient("bottom");
 
             // setup y
-            var yValue = function(d) { return d.rating;}, 
+            var yValue = function(d) { return d.stars;}, 
                 yScale = d3.scale.linear().range([height, 0]), 
                 yMap = function(d) { return yScale(yValue(d));}, 
                 yAxis = d3.svg.axis().scale(yScale).orient("left");
