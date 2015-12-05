@@ -30,6 +30,8 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
         },
 
         initGraph: function (data) {
+            $("#graph").empty();
+            
             var margin = {top: 20, right: 30, bottom: 20, left: 30},
                 width = 600 - margin.left - margin.right,
                 height = 300 - margin.top - margin.bottom;

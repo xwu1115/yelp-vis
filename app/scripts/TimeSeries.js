@@ -69,14 +69,14 @@ function drawTimeView (data) {
                   .text("Rating Score");
 
               // draw dots
-              svg.selectAll(".dot")
+              var dots = svg.selectAll(".dot")
                   .data(data)
                   .enter().append("circle")
                   .attr("class", "dot")
                   .attr("r", function(d){return d.num/8;})
-                  .attr("cx", function(d){return xScale(new Date(d.time));})
+                  .attr("cx", function(d){return xScale(new Date(data[40].time));})
                   .attr("cy", yMap)
-                  .style("fill-opacity", .7)
+                  .style("fill-opacity", 0)
                   .style("stroke", "white")
                   .style("stroke-opacity", "0")
                   .style("fill", function(d) { return color(d.time);})
@@ -98,4 +98,9 @@ function drawTimeView (data) {
                            .style("opacity", 0);
                   });
 
+                dots.transition()
+                  .duration(1200)
+                  .style("fill-opacity", .7)
+                  .attr("cx", function(d){return xScale(new Date(d.time));});
+                  
 }

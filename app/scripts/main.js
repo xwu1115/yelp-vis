@@ -12,9 +12,12 @@ window.YelpInfoVis = {
 };
 
 var globalData = [];
+var allData = [];
 var textData = [];
 var timeData = [];
 var map;
+var controlPanelView;
+var graph;
 
 $(document).ready(function () {
     'use strict';

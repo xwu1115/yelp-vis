@@ -1,22 +1,27 @@
-function updateMap(){
-        for (var i = 0; i < globalData.length; i++) {
-                var d = globalData[i];
+function updateMap(data){
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 36.1215, lng: -115.1739},
+                zoom: 12
+            });
+
+        for (var i = 0; i < data.length; i++) {
+                var d = data[i];
                 var lat = d.latitude;
                 var lng = d.longitude;
 
                 var circle = new google.maps.Circle({
-                    strokeColor: '#FF0000',
-                    strokeOpacity: 0,
-                    strokeWeight: 2,
-                    fillColor: '#FF0000',
-                    fillOpacity: d.stars/5*0.8,
+                    strokeColor: '#000',
+                    strokeOpacity: 0.5,
+                    strokeWeight: 1,
+                    fillColor: "red",
+                    fillOpacity: d.stars/5*0.9,
                     map: map,
                     center: new google.maps.LatLng(lat,lng),
-                    radius: d.review_count/2
+                    radius: d.review_count
                 });
                 circle['index'] = i;
                 circle.addListener('click', function (event) {
-                    updateDetaiView(globalData[this.index]);
+                    updateDetaiView(data[this.index]);
                 });
         }
     }
@@ -52,4 +57,25 @@ function updateMap(){
               updateDetaiView(d);
     }
 
+    function selectCategory(id){
+        if(id == "All"){
+            graph.initGraph(allData);
+            updateMap(allData);
+            return;
+        }
+        var find = false;
+        var d = allData.filter(function (el){
+            //console.log("el " + el);
+            var category = el.categories;
+            for (i in category) {
+                if (category[i].indexOf(id)!=-1) {
+                    return true;
+                };
+            };
+            return false;
+        })
+        console.log(d);
+        graph.initGraph(d);
+        updateMap(d);
+    }
 

@@ -67,7 +67,8 @@
                 'success' : function(data, textStats, XMLHttpRequest) {
                     //console.log(data);
                     globalData = data;
-                    updateMap();
+                    allData = globalData;
+                    updateMap(data);
                     callback(data);
                     downloadText();
                 },
