@@ -32,8 +32,8 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
         initGraph: function (data) {
             $("#graph").empty();
             
-            var margin = {top: 20, right: 30, bottom: 20, left: 30},
-                width = 600 - margin.left - margin.right,
+            var margin = {top: 20, right: 50, bottom: 50, left: 60},
+                width = 800 - margin.left - margin.right,
                 height = 300 - margin.top - margin.bottom;
 
             // setup x 
@@ -77,8 +77,8 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
                   .call(xAxis)
                   .append("text")
                   .attr("class", "label")
-                  .attr("x", width)
-                  .attr("y", -6)
+                  .attr("x", width - 5)
+                  .attr("y", 40)//move label down
                   .style("text-anchor", "end")
                   .text("Rating Number");
 
@@ -89,7 +89,8 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
                   .append("text")
                   .attr("class", "label")
                   .attr("transform", "rotate(-90)")
-                  .attr("y", 6)
+                  .attr("x", -10)
+                  .attr("y", -40)
                   .attr("dy", ".71em")
                   .style("text-anchor", "end")
                   .text("Rating Score");
@@ -103,7 +104,7 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
                   .attr("cx", xMap)
                   .attr("cy", yMap)
                   .style("opacity", "0.7")
-                  .style("fill", function(d) { return d3.rgb("#817392");}) 
+                  .style("fill", function(d) { return d3.rgb("#EF6A50");}) 
                   .on("mouseover", function(d) {
                     console.log(d);
                     updateDetaiView(d);

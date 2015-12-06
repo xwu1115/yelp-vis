@@ -1,3 +1,9 @@
+.content {
+	width:1400px !important;
+}
+
+
+
 .sideBar {
 	background-color:#494544;
 	padding-left: 0px;
@@ -13,10 +19,19 @@
 }
 
 .sideBar .btn:hover {
-	background-color: #f8f8f8;
+	background-color: #AAA9A9;
+	color:#494544;
+	
+}
+
+.sideBar .btn:focus {
+	background-color: #C5D668;
 	color:#494544;
 	font-weight:bold;
 }
+
+
+
 .mainGraph{
 	overflow: hidden;
 	width:60%;
@@ -86,13 +101,30 @@ ul li {
 .x.axis path {
   display: none;
 }
+
+.x.axis text {
+	font-size:10px;
+}
+
+.x.axis .label {
+	opacity:0.8;
+}
 .y.axis line, .y.axis path {
   fill: none;
   stroke: #000;
 }
 
+.y.axis text {
+	font-size:10px;
+}
+
+.y.axis .label {
+	opacity:0.8;
+}
+
+
+
 .detail{
-	background-color: #f0f0f0;
 	width:30%;
 	padding:0px;
 }
@@ -114,42 +146,50 @@ ul li {
 }
 
 .detail_retail {
-	height:100px;
-	background-color:#dddcdb;
+	height:120px;
+	background-color:#B9D154;
 	padding-top:10px;
-	padding-left:15px;
+	padding-left:20px;
+	padding-right:20px;
 }
 
 	.retail_name {
-		font-size:24px;
+		font-size:18px;
 		margin-bottom:0px;
+		color:#494544;
+		font-weight:bold;
 	}
 
 	.retail_review{
-		font-size:12px;
+		font-size:14px;
 		margin-bottom:0px;
-
+		color:#fff;
 	}
 	.retail_type{
 		font-size:12px;
 		margin-bottom:0px;
+		font-weight:bold;
 
 	}
 	.retail_location{
 		font-size:12px;
 		margin-bottom:0px;
+
 	}
 
 .detail_vis1 {
 	height:300px;
-	/*background-color:#817392;*/
+	background-color:#494544;
 
 }
 
 
 .detail_vis2 {
-	height:300px;
-	/*background-color:#582942;*/
+	height:285px;
+	margin-top:10px;
+	background-color:#F0F0F0;
+	padding-left:20px;
+	padding-right:20px;
 }
 .vis2_content{
 	margin: 0 auto;
@@ -163,3 +203,6 @@ ul li {
   background-color: rgba(255,255,255,0.7);
   pointer-events: none;
 }
+
+
+

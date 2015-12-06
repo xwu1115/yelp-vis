@@ -2,7 +2,7 @@
         //var frequency_list = [{"text": "last", "size": 3}, {"text": "delicious", "size": 3}, {"text": "huge", "size": 3}, {"text": "sure", "size": 3}, {"text": "medical", "size": 3}, {"text": "other", "size": 4}, {"text": "many", "size": 5}, {"text": "nice", "size": 5}, {"text": "good", "size": 7}, {"text": "great", "size": 7}];
         var frequency_list = textData[id];
 
-        d3.layout.cloud().size([350, 250])
+        d3.layout.cloud().size([400, 300])
             .words(frequency_list)
             .rotate(0)
             .fontSize(function(d) { return d.size*100; })
@@ -12,8 +12,8 @@
 
     function draw(words) {
         var color = d3.scale.linear()
-             .domain([0,1,2,3,4,5,6,10,15,20,100])
-             .range(["#ddd", "#ccc", "#bbb", "#aaa", "#999", "#888", "#777", "#666", "#555", "#444", "#333", "#222"]);
+             .domain([2,3,4,5,6,10,15,20,100,200])
+             .range(["#ddd", "#ccc", "#bbb", "#aaa", "#999", "#888", "#777", "#666", "#555", "#444"]);
 
         $(".detail_vis1").empty();
         var cloud = d3.select(".detail_vis1").append("svg")
@@ -23,7 +23,7 @@
                 .append("g")
                 // without the transform, words words would get cutoff to the left and top, they would
                 // appear outside of the SVG area
-                .attr("transform", "translate(200,120)")
+                .attr("transform", "translate(180,130)")
                 .selectAll("text")
                 .data(words)
                 .enter().append("text")
