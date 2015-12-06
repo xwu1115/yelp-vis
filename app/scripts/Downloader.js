@@ -61,65 +61,50 @@
 
     function downloadTmp(callback){
         $.ajax({
-                'url' : "../data.json",
-                'dataType' : 'jsonp',
+                'url' : "../files/data.json",
+                'dataType' : 'json',
                 'jsonpCallback' : 'cb',
                 'success' : function(data, textStats, XMLHttpRequest) {
-                    globalData = data.businesses;
-                    updateMap();
-                    callback(data.businesses);
+                    //console.log(data);
+                    globalData = data;
+                    allData = globalData;
+                    updateMap(data);
+                    callback(data);
+                    downloadText();
+                },
+                'error': function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log(textStatus);
                 }
         });
     }
 
-    function updateMap(){
-        for (var i = 0; i < globalData.length; i++) {
-                var d = globalData[i];
-                var co = d.location.coordinate;
-                var lat = co.latitude;
-                var lng = co.longitude;
-
-                var circle = new google.maps.Circle({
-                    strokeColor: '#FF0000',
-                    strokeOpacity: 0,
-                    strokeWeight: 2,
-                    fillColor: '#FF0000',
-                    fillOpacity: d.rating/5*0.8,
-                    map: map,
-                    center: new google.maps.LatLng(lat,lng),
-                    radius: d.review_count/8
-                });
-                circle['index'] = i;
-                circle.addListener('click', function (event) {
-                    updateDetaiView(globalData[this.index]);
-                });
-        }
-    }
-
-    function updateDetaiView(d){
-        var category = "";
-        for (var i = 0; i < d.categories.length; i++) {
-            category += d.categories[i][0];
-            category += "\r\n";
-        };
-        var location = "";
-        for (var i = 0; i < d.location.display_address.length; i++) {
-            location += d.location.display_address[i];
-            location += "\r\n";
-        };
-
-        var resturant = new YelpInfoVis.Models.ResturantDetail({
-            name: d.name, 
-            reviewScore: d.rating,
-            reviewNumber: d.review_count,
-            type: category, 
-            location: location, 
-            reviews: []
+    function downloadText(){
+        $.ajax({
+                'url' : "../files/reviewText.json",
+                'dataType' : 'json',
+                'jsonpCallback' : 'cb',
+                'success' : function(data, textStats, XMLHttpRequest) {
+                    textData = data;
+                    initDetailView(globalData);
+                },
+                'error': function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log(textStatus);
+                }
         });
-        $(".detail").empty();
-        var view = new YelpInfoVis.Views.ResturantDetailView({el: ".detail", model: resturant});
-        view.render();
-        showWordCloud();
     }
 
+    function downloadTimeData(){
+        $.ajax({
+                'url' : "../files/newReviewData.json",
+                'dataType' : 'json',
+                'jsonpCallback' : 'cb',
+                'success' : function(data, textStats, XMLHttpRequest) {
+                    timeData = data;
+                    drawTimeView(data);
+                },
+                'error': function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log(textStatus);
+                }
+        });
+    }
             

@@ -15,7 +15,10 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
 
         className: '',
 
-        events: {},
+        events: {
+                // "click.btn-cat": "selectCategory",
+                //  "click .btn-pri": "selectPrice"
+                },
 
         initialize: function () {
             this.listenTo(this.model, 'change', this.render);
@@ -26,16 +29,13 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
             this.$el.html(this.template(this.model.toJSON()));
         },
 
-        selectPrice: function() {
+        selectPrice: function(price) {
 
         },
 
         selectCategory: function() {
-
-        },
-
-        selectYear: function() {
-            
+            event.preventDefault();
+            alert($(event.currentTarget).text());
         }
     });
 

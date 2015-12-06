@@ -12,12 +12,16 @@ window.YelpInfoVis = {
 };
 
 var globalData = [];
+var allData = [];
+var textData = [];
+var timeData = [];
 var map;
+var controlPanelView;
+var graph;
 
 $(document).ready(function () {
     'use strict';
     YelpInfoVis.init();
-    console.log('start!');
     this.appRouter = new YelpInfoVis.Routers.AppRouter;
     Backbone.history.start({ pushState: true });
 });

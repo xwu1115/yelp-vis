@@ -18,8 +18,6 @@
         <!--[if lt IE 10]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
-
         <div class="container-fluid">
             <div class ="content">
                 <div class = "col-lg-3 col-md-3 col-sm-12 sideBar">
@@ -28,7 +26,17 @@
                      <div id="graph"></div>
                      <div id="map"></div>
                 </div>
-                <div class = "col-lg-3 col-md-3 col-sm-12 detail">Detail</div>
+                <div class = "col-lg-3 col-md-3 col-sm-12 detail">
+                    <div class = "shop"></div>
+                    <div class="detail_vis1">
+                        
+                    </div>
+
+                    <div class="detail_vis2">
+                        <div class = "vis2_content"></div>
+                    </div>
+
+                </div>
             </div>
         </div>
 
@@ -69,7 +77,13 @@
         <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
         <script src="scripts/d3.layout.cloud.js"></script>
         
+        <link href="scripts/c3/c3.css" rel="stylesheet" type="text/css">
 
+        <!-- Load d3.js and c3.js -->
+        <script src="scripts/c3/c3.min.js"></script>
+
+        <script src="scripts/UpdateViews.js"></script>
+        <script src="scripts/TimeSeries.js"></script>
         <script src="scripts/WordCloud.js"></script>
         <script src="scripts/Downloader.js"></script>
         

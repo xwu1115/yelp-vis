@@ -31,16 +31,16 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
 
         initMap: function () {
             map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 33.7758, lng: -84.3947},
-                zoom: 15
+            center: {lat: 36.1215, lng: -115.1739},
+                zoom: 12
             });
 
-            if(navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                var initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-                    map.setCenter(initialLocation);
-                }, function() {});
-            }
+            // if(navigator.geolocation) {
+            //     navigator.geolocation.getCurrentPosition(function(position) {
+            //     var initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+            //         map.setCenter(initialLocation);
+            //     }, function() {});
+            // }
         },
 
         showDetail: function() {
