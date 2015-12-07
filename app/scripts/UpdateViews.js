@@ -3,7 +3,7 @@ function updateMap(data){
             center: {lat: 36.1215, lng: -115.1739},
                 zoom: 14
             });
-        var colors = ["#780700","#FF0F00","#D94200","#F08400","#DDA307","#FDE300","#FFE546","#FFE59C","#FFE5C6"];
+        var colors = ["#780700","#FF0F00","#D94200","#F08400","#f8be21","#FDE300","#FFE546","#FFE59C","#FFE5C6"];
         circles = [];
         for (var i = 0; i < data.length; i++) {
                 var d = data[i];
@@ -11,7 +11,7 @@ function updateMap(data){
                 var lng = d.longitude;
 
                 var circle = new google.maps.Circle({
-                    strokeColor: '#B9D154',
+                    strokeColor: '#494544',
                     strokeOpacity: 1,
                     strokeWidth: 2,
                     fillColor: colors[10-d.stars*2],
@@ -127,7 +127,7 @@ function updateMap(data){
         // if(b==true)circle.setRadius(Math.sqrt(d.review_count)*30);
         // else circle.setRadius(Math.sqrt(d.review_count)*10);
         if(b == true)circle.setOptions({strokeWeight: 10, strokeColor: "#000"});
-        else circle.setOptions({strokeWeight: 2, strokeColor: "#B9D154"});
+        else circle.setOptions({strokeWeight: 2, strokeColor: "#494544"});
 
 
     }

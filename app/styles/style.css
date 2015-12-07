@@ -20,7 +20,7 @@
 }
 
 .sideBar .btn:hover {
-	background-color: #AAA9A9;
+	background-color: #d6d4d3;
 	color:#494544;
 	
 }
@@ -149,7 +149,7 @@ ul li {
 
 .detail_retail {
 	height:120px;
-	background-color:#B9D154;
+	background-color:#ef6a50;
 	padding-top:10px;
 	padding-left:20px;
 	padding-right:20px;
@@ -158,7 +158,7 @@ ul li {
 	.retail_name {
 		font-size:18px;
 		margin-bottom:0px;
-		color:#494544;
+		color:#fff;
 		font-weight:bold;
 	}
 
@@ -180,22 +180,34 @@ ul li {
 	}
 
 .detail_vis1 {
-	height:300px;
-	background-color:#494544;
+	height:250px;
+	background-color:#f0f0f0;
 
 }
 
 
 .detail_vis2 {
-	height:285px;
+	height:315px;
 	margin-top:10px;
-	background-color:#F0F0F0;
+	background-color:#494544;
 	padding-left:20px;
 	padding-right:20px;
 }
 .vis2_content{
-	margin: 0 auto;
+	margin-top:0px;
 	padding: 15px;
+}
+
+.vis2_title_text {
+	color:#fff;
+
+}
+
+.vis2_title{
+	height:30px;
+	background-color:#494544;
+	padding-top:10px;
+	padding-left:15px;
 }
 
 .tooltip {
