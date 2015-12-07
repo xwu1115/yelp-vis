@@ -69,19 +69,33 @@ function drawTimeView (data) {
                   .text("Rating Score");
 
               // draw dots
-              var dots = svg.selectAll(".dot")
+              // var dots = svg.selectAll(".dot")
+              //     .data(data)
+              //     .enter().append("circle")
+              //     .attr("class", "dot")
+              //     .attr("r", function(d){return d.num/10;})
+              //     .attr("cx", function(d){return xScale(new Date(data[40].time));})
+              //     .attr("cy", yMap)
+              var dots = svg.selectAll(".bar")
                   .data(data)
-                  .enter().append("circle")
-                  .attr("class", "dot")
-                  .attr("r", function(d){return d.num/8;})
-                  .attr("cx", function(d){return xScale(new Date(data[40].time));})
-                  .attr("cy", yMap)
-                  .style("fill-opacity", 0)
-                  .style("stroke", "white")
+                  .enter().append("rect")
+                  .attr("class", ".bar")
+                  .attr("width", function(d){return 3;})
+                  .attr("height", function(d){return d.num/3;})
+                  .attr("x", function(d){return xScale(new Date(data[40].time));})
+                  .attr("y", yMap)
+                  //.attr("transform",)
+                  .style("fill-opacity", 0.6)
+                  //.style("stroke", "white")
                   .style("stroke-opacity", "0")
-                  .style("fill", function(d) { return color(d.time);})
+                  .style("stroke", function(d){ return "red";})
+                  .style("stroke-width", "1")
+                  //.style("fill", function(d) { return color(d.time);})
+                  .style("fill", function(d) { return "red";})
                   .on("mouseover", function(d) {
-                        d3.select(this).style("stroke-opacity", "1");
+                        //d3.select(this).style("stroke-opacity", "1");
+                        d3.select(this).style("stroke", "black");
+                        d3.select(this).style("stroke-width", "3");
                         tooltip.transition()
                            .duration(200)
                            .style("opacity", 1);
@@ -92,7 +106,8 @@ function drawTimeView (data) {
                            //.style("right", "0px");
                   })
                   .on("mouseout", function(d) {
-                        d3.select(this).style("stroke-opacity", "0");
+                        d3.select(this).style("stroke", "red");
+                         d3.select(this).style("stroke-width", "1");
                         tooltip.transition()
                            .duration(500)
                            .style("opacity", 0);
@@ -100,7 +115,8 @@ function drawTimeView (data) {
 
                 dots.transition()
                   .duration(1200)
-                  .style("fill-opacity", .7)
-                  .attr("cx", function(d){return xScale(new Date(d.time));});
+                  //.style("fill-opacity", 0)
+                  .style("stroke-opacity", "0.3")
+                  .attr("x", function(d){return xScale(new Date(d.time));});
                   
 }
