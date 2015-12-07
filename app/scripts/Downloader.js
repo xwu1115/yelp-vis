@@ -95,7 +95,7 @@
 
     function downloadTimeData(){
         $.ajax({
-                'url' : "../files/newReviewData.json",
+                'url' : "../files/reviewData1.json",
                 'dataType' : 'json',
                 'jsonpCallback' : 'cb',
                 'success' : function(data, textStats, XMLHttpRequest) {
