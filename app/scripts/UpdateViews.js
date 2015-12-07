@@ -78,4 +78,17 @@ function updateMap(data){
         graph.initGraph(d);
         updateMap(d);
     }
-
+    function selectPrice(id){
+        if(id == "All"){
+            graph.initGraph(allData);
+            updateMap(allData);
+            return;
+        }
+        var find = false;
+        var d = allData.filter(function (el){
+            console.log(el.attributes["Price Range"]);
+            return el.attributes["Price Range"] == id;
+        })
+        graph.initGraph(d);
+        updateMap(d);
+    }

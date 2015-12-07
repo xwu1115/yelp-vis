@@ -68,7 +68,7 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
             
               // don't want dots overlapping axis, so add in buffer to data domain
               xScale.domain([d3.min(data, xValue)-5, d3.max(data, xValue)+5]);
-              yScale.domain([d3.min(data, yValue)-0.25, d3.max(data, yValue)+0.25]);
+              yScale.domain([1,5]);
               //yScale.domain([0, 5]);
               // x-axis
               svg.append("g")
