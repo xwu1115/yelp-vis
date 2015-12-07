@@ -53,7 +53,7 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
                 color = d3.scale.category10();
 
             // add the graph canvas to the body of the webpage
-            var svg = d3.select("#graph").append("svg")
+            svg = d3.select("#graph").append("svg")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
@@ -103,15 +103,20 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
                   .attr("r", 4)
                   .attr("cx", xMap)
                   .attr("cy", yMap)
+                  .attr("stroke-width", 2)
+                  .attr("stroke", "black")
+                  .attr("stroke-opacity", 0)
                   .style("opacity", "0.7")
+                  .style("strokeColor", '#B9D154')
                   .style("fill", function(d) { return d3.rgb("#EF6A50");}) 
                   .on("mouseover", function(d) {
-                    console.log(d);
+                    updateGraphView(d);
                     updateDetaiView(d);
-
+                    updateCircle(d, true);
+                    
                   })
                   .on("mouseout", function(d) {
-                     
+                      updateCircle(d, false);
                   });
             }
         });

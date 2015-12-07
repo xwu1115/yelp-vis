@@ -1,9 +1,10 @@
 function updateMap(data){
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 36.1215, lng: -115.1739},
-                zoom: 12
+                zoom: 14
             });
-
+        var colors = ["#780700","#FF0F00","#D94200","#F08400","#DDA307","#FDE300","#FFE546","#FFE59C","#FFE5C6"];
+        circles = [];
         for (var i = 0; i < data.length; i++) {
                 var d = data[i];
                 var lat = d.latitude;
@@ -12,17 +13,19 @@ function updateMap(data){
                 var circle = new google.maps.Circle({
                     strokeColor: '#B9D154',
                     strokeOpacity: 1,
-                    strokeWeight: 2,
-                    fillColor: "#EF6A50",
-                    fillOpacity: 0.9,
+                    strokeWidth: 2,
+                    fillColor: colors[10-d.stars*2],
+                    fillOpacity: 1,
                     map: map,
                     center: new google.maps.LatLng(lat,lng),
-                    radius: d.review_count
+                    radius: Math.sqrt(d.review_count)*10
                 });
                 circle['index'] = i;
                 circle.addListener('click', function (event) {
                     updateDetaiView(data[this.index]);
+                    updateGraphView(data[this.index]);
                 });
+                circles.push(circle);
         }
     }
 
@@ -74,7 +77,7 @@ function updateMap(data){
             };
             return false;
         })
-        console.log(d);
+        globalData = d;
         graph.initGraph(d);
         updateMap(d);
     }
@@ -89,6 +92,43 @@ function updateMap(data){
             console.log(el.attributes["Price Range"]);
             return el.attributes["Price Range"] == id;
         })
+        globalData = d;
         graph.initGraph(d);
         updateMap(d);
     }
+
+    function updateGraphView(data){
+        svg.selectAll(".dot")
+                  .data(globalData)
+                  .attr("stroke-opacity", function(d){
+                    if(d.business_id == data.business_id)return 1;
+                    else return 0;
+                  })
+                  .attr("r", function(d){
+                    if(d.business_id == data.business_id)return 10;
+                    else return 4;
+                  });
+    }
+
+    function updateCircle(d, b){
+        if(circles.length>0){
+            var i = 0;       
+            for(; i < globalData.length; i++){
+                var tmp = globalData[i];
+                if(tmp.business_id == d.business_id){
+                    break;
+                }
+            }
+        var centerPoint = {lat: d.latitude, lng: d.longitude};
+        //map.setCenter(centerPoint);
+        map.setZoom(12);
+        var circle = circles[i];
+        //console.log(circle.strokeWidth);
+        // if(b==true)circle.setRadius(Math.sqrt(d.review_count)*30);
+        // else circle.setRadius(Math.sqrt(d.review_count)*10);
+        if(b == true)circle.setOptions({strokeWeight: 10, strokeColor: "#000"});
+        else circle.setOptions({strokeWeight: 2, strokeColor: "#B9D154"});
+
+
+    }
+}
