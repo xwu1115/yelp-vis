@@ -6,13 +6,16 @@ import nltk
 import time
 import operator
 
-fp= open('reviewData.json', 'w')
+fp= open('reviewData1.json', 'w')
 
 with open('review.json') as data_file:    
     data = json.load(data_file)
 
 reviewsYear = dict()
 for d in data:
+        tmp = int(d['date'][0:4]) + 0
+        if tmp <=2009:
+            continue
         year = d['date'][0:7]
         score = d['stars']
         if year in reviewsYear:
