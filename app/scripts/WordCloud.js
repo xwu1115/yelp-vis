@@ -28,7 +28,7 @@
                 .data(words)
                 .enter().append("text")
                 .style("font-size", function(d) { return d.size*2 + "px"; })
-                .style("fill", function(d, i) { return color(i); })
+                .style("fill", function(d, i) { return color(9 -i); })
                 .style("fill-opacity", 0)
                 .text(function(d) { return d.text; });
         cloud.transition()
