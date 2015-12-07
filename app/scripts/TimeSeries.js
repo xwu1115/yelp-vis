@@ -17,8 +17,8 @@ function drawTimeView (data) {
                         .orient("bottom")
                         .ticks(d3.time.months, 12)
                         .tickFormat(d3.time.format('%y'))
-                        .tickSize(0)
-                        .tickPadding(1);
+
+                        .tickPadding(6);
 
             // setup y
             var yValue = function(d) { return d.score;}, 
