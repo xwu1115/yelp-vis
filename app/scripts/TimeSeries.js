@@ -46,7 +46,7 @@ function drawTimeView (data) {
               //yScale.domain([0, 5]);
               // x-axis
               svg.append("g")
-                  .attr("class", "x axis")
+                  .attr("class", "x axis_t")
                   .attr("transform", "translate(0," + height + ")")
                   .call(xAxis)
                   .append("text")
@@ -58,7 +58,7 @@ function drawTimeView (data) {
 
               // y-axis
               svg.append("g")
-                  .attr("class", "y axis")
+                  .attr("class", "y axis_t")
                   .call(yAxis)
                   .append("text")
                   .attr("class", "label")
@@ -85,13 +85,13 @@ function drawTimeView (data) {
                   .attr("x", function(d){return xScale(new Date(data[40].time));})
                   .attr("y", yMap)
                   //.attr("transform",)
-                  .style("fill-opacity", 0.6)
+                  .style("fill-opacity", 0.8)
                   //.style("stroke", "white")
                   .style("stroke-opacity", "0")
-                  .style("stroke", function(d){ return "red";})
+                  .style("stroke", function(d){ return "#ef6a50";})
                   .style("stroke-width", "1")
                   //.style("fill", function(d) { return color(d.time);})
-                  .style("fill", function(d) { return "red";})
+                  .style("fill", function(d) { return "#ef6a50";})
                   .on("mouseover", function(d) {
                         //d3.select(this).style("stroke-opacity", "1");
                         d3.select(this).style("stroke", "black");

@@ -85,11 +85,11 @@ ul li {
 	margin-bottom: 30px;
 }
 
- path {
+/* path {
 	stroke: steelblue;
 	stroke-width: 1;
 	fill: none;
-}
+}*/
 
 .axis {
   shape-rendering: crispEdges;
@@ -111,7 +111,7 @@ ul li {
 .x.axis .label {
 	opacity:0.8;
 }
-.y.axis line, .y.axis path {
+.y.axis line {
   fill: none;
   stroke: #000;
 }
@@ -122,6 +122,42 @@ ul li {
 
 .y.axis .label {
 	opacity:0.8;
+}
+
+
+
+.y.axis path {
+	stroke:#000;
+	fill:none;
+	stroke-width: 1;
+}
+
+
+
+
+.x.axis_t text {
+	font-size:10px;
+	fill:#fff;
+}
+
+
+.y.axis_t text {
+	font-size:10px;
+	fill:#fff;
+}
+
+
+
+.y.axis_t path {
+	stroke:#fff;
+	fill:none;
+	stroke-width: 1;
+}
+
+.x.axis_t path {
+	stroke:#fff;
+	fill:none;
+	stroke-width: 1;
 }
 
 
@@ -200,6 +236,8 @@ ul li {
 
 .vis2_title_text {
 	color:#fff;
+	font-size:18px;
+	font-weight:bold;
 
 }
 
