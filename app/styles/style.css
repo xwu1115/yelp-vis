@@ -9,6 +9,7 @@
 	padding-left: 0px;
 	padding-right: 0px;
 	width:10%;
+	min-height: 700px;
 }
 
 .sideBar .btn {
@@ -40,7 +41,7 @@
 	background-color: #ef6a50;
 	min-height: 100px;
 	padding-top: 15px;
-	padding-bottom: 10px;
+	padding-bottom: 15px;
 	color:#fff;
 	font-family: 'Roboto', sans-serif;
 	text-align:center;
@@ -67,6 +68,7 @@ ul li {
 
 .price{
 	margin-top: 30px;
+	margin-bottom: 20px;
 }
 
 .btn-group-vertical > button {
@@ -204,5 +206,7 @@ ul li {
   pointer-events: none;
 }
 
-
+.category{
+	margin-top: 30px;
+}
 

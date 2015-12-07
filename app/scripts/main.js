@@ -18,6 +18,8 @@ var timeData = [];
 var map;
 var controlPanelView;
 var graph;
+var svg;
+var circles = [];
 
 $(document).ready(function () {
     'use strict';
