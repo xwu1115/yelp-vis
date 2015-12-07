@@ -2,7 +2,7 @@ function drawTimeView (data) {
     console.log(new Date(data[0].time));
     var margin = {top: 20, right: 30, bottom: 20, left: 30},
                 width = 400 - margin.left - margin.right,
-                height = 200 - margin.top - margin.bottom;
+                height = 250 - margin.top - margin.bottom;
 
 
             var xScale = d3.time.scale()
@@ -51,8 +51,8 @@ function drawTimeView (data) {
                   .call(xAxis)
                   .append("text")
                   .attr("class", "label")
-                  .attr("x", width)
-                  .attr("y", -6)
+                  .attr("x", width - 40)
+                  .attr("y", 20)
                   .style("text-anchor", "end")
                   .text("Time");
 
@@ -62,8 +62,8 @@ function drawTimeView (data) {
                   .call(yAxis)
                   .append("text")
                   .attr("class", "label")
-                  .attr("transform", "rotate(-90)")
-                  .attr("y", 6)
+
+                  .attr("y", -20)
                   .attr("dy", ".71em")
                   .style("text-anchor", "end")
                   .text("Rating Score");
