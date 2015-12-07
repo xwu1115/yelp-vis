@@ -11,10 +11,10 @@ function updateMap(data){
 
                 var circle = new google.maps.Circle({
                     strokeColor: '#B9D154',
-                    strokeOpacity: 0.8,
-                    strokeWeight: 3,
+                    strokeOpacity: 1,
+                    strokeWeight: 2,
                     fillColor: "#EF6A50",
-                    fillOpacity: 0.7,
+                    fillOpacity: 0.9,
                     map: map,
                     center: new google.maps.LatLng(lat,lng),
                     radius: d.review_count
