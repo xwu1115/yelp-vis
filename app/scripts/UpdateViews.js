@@ -126,7 +126,7 @@ function updateMap(data){
         //console.log(circle.strokeWidth);
         // if(b==true)circle.setRadius(Math.sqrt(d.review_count)*30);
         // else circle.setRadius(Math.sqrt(d.review_count)*10);
-        if(b == true)circle.setOptions({strokeWeight: 10, strokeColor: "#000"});
+        if(b == true)circle.setOptions({strokeWeight: 8, strokeColor: "#000"});
         else circle.setOptions({strokeWeight: 2, strokeColor: "#494544"});
 
 

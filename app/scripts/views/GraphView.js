@@ -110,13 +110,14 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
                   .style("strokeColor", '#B9D154')
                   .style("fill", function(d) { return d3.rgb("#EF6A50");}) 
                   .on("mouseover", function(d) {
+                    updateCircle(d, false);
                     updateGraphView(d);
                     updateDetaiView(d);
                     updateCircle(d, true);
                     
                   })
                   .on("mouseout", function(d) {
-                      updateCircle(d, false);
+                    updateCircle(d, false);
                   });
             }
         });
