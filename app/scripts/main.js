@@ -20,6 +20,9 @@ var controlPanelView;
 var graph;
 var svg;
 var circles = [];
+var colors = ["#780700","#FF0F00","#D94200","#F08400","#f8be21","#FDE300","#FFE546","#FFE59C","#FFE5C6"];
+var selectedPrice = "All";
+var selectedCategory = "All";
 
 $(document).ready(function () {
     'use strict';

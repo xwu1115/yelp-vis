@@ -6,10 +6,11 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <!-- build:css(.tmp) styles/main.css -->
+        <!-- build:css(.) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
-        <link rel="stylesheet" href="styles/style.css">
         <!-- endbuild -->
+         <link rel="stylesheet" href="styles/style.css">
+
         <!-- build:js scripts/vendor/modernizr.js -->
         <script src="bower_components/modernizr/modernizr.js"></script>
         <!-- endbuild -->
@@ -84,19 +85,18 @@
 
         <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
         <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
-        <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
-        <script src="scripts/d3.layout.cloud.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWoM60pPKM0Y_D6hFIxOkoiUBRpbMGY1w&callback=initMapView"
+        async defer></script>
         
-        <link href="scripts/c3/c3.css" rel="stylesheet" type="text/css">
-
-        <!-- Load d3.js and c3.js -->
-        <script src="scripts/c3/c3.min.js"></script>
-
+        <!-- build:js scripts/app.js -->
+        <script src="scripts/d3.min.js" charset="utf-8"></script>
+        <script src="scripts/d3.layout.cloud.js"></script>
         <script src="scripts/UpdateViews.js"></script>
         <script src="scripts/TimeSeries.js"></script>
         <script src="scripts/WordCloud.js"></script>
         <script src="scripts/Downloader.js"></script>
-        
+        <!-- endbuild -->
+
         <!-- build:js({.tmp,app}) scripts/main.js -->
         <script src="scripts/main.js"></script>
         <script src="scripts/templates.js"></script>
@@ -111,9 +111,5 @@
         <script src="scripts/models/ResturantDetail.js"></script>
         <script src="scripts/views/ResturantDetailView.js"></script>
         <!-- endbuild -->
-        
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWoM60pPKM0Y_D6hFIxOkoiUBRpbMGY1w&callback=initMapView"
-        async defer></script>
-
 </body>
 </html>

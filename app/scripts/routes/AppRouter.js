@@ -12,7 +12,7 @@ YelpInfoVis.Routers = YelpInfoVis.Routers || {};
 
     	mainPage: function(){
     		var control = new YelpInfoVis.Models.Control({});
-
+            console.log("sidebar!");
     		controlPanelView = new YelpInfoVis.Views.ControlPanel({model:control, el:'.sideBar'});
             controlPanelView.render();
             

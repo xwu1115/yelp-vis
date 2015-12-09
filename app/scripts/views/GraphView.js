@@ -108,7 +108,9 @@ YelpInfoVis.Views = YelpInfoVis.Views || {};
                   .attr("stroke-opacity", 0)
                   .style("opacity", "0.7")
                   .style("strokeColor", '#B9D154')
-                  .style("fill", function(d) { return d3.rgb("#EF6A50");}) 
+                  .style("fill", function(d) { 
+                      return colors[10-d.stars*2];
+                  }) 
                   .on("mouseover", function(d) {
                     updateCircle(d, false);
                     updateGraphView(d);

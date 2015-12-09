@@ -3,7 +3,6 @@ function updateMap(data){
             center: {lat: 36.1215, lng: -115.1739},
                 zoom: 14
             });
-        var colors = ["#780700","#FF0F00","#D94200","#F08400","#f8be21","#FDE300","#FFE546","#FFE59C","#FFE5C6"];
         circles = [];
         for (var i = 0; i < data.length; i++) {
                 var d = data[i];
@@ -61,40 +60,47 @@ function updateMap(data){
     }
 
     function selectCategory(id){
-        if(id == "All"){
-            graph.initGraph(allData);
-            updateMap(allData);
-            return;
-        }
-        var find = false;
+        selectedCategory = id;
+        // if(selectedCategory == "All"){
+        //     graph.initGraph(allData);
+        //     updateMap(allData);
+        //     return;
+        // }
         var d = allData.filter(function (el){
             //console.log("el " + el);
             var category = el.categories;
-            for (i in category) {
-                if (category[i].indexOf(id)!=-1) {
-                    return true;
-                };
-            };
-            return false;
+            return (selectedPrice == "All" || el.attributes["Price Range"] == selectedPrice) && (selectedCategory == "All" || isInCategory(id, el.categories));
+
         })
         globalData = d;
         graph.initGraph(d);
         updateMap(d);
     }
+
     function selectPrice(id){
-        if(id == "All"){
-            graph.initGraph(allData);
-            updateMap(allData);
-            return;
-        }
-        var find = false;
+        selectedPrice = id;
+        console.log(selectedPrice);
+        // if(selectedPrice == "All"){
+        //     graph.initGraph(allData);
+        //     updateMap(allData);
+        //     return;
+        // }
         var d = allData.filter(function (el){
             console.log(el.attributes["Price Range"]);
-            return el.attributes["Price Range"] == id;
+            return (selectedPrice == "All" || el.attributes["Price Range"] == id) && (selectedCategory == "All" || (isInCategory(selectedCategory, el.categories)));
         })
         globalData = d;
         graph.initGraph(d);
         updateMap(d);
+    }
+
+    function isInCategory(id, category){
+        for (i in category) {
+                if (category[i].indexOf(id)!=-1) {
+                    return true;
+                };
+        };
+        return false;
     }
 
     function updateGraphView(data){
